@@ -52,9 +52,18 @@ def evaluate_models(X_train, X_test, y_train, y_test, models, params):
             train_model_score = r2_score(y_train, y_train_pred)
             test_model_score = r2_score(y_test, y_test_pred)
             
+            #report[list(model.keys())[i]] = test_model_score try this one if code gives some error in this file
             report[model_name] = test_model_score
         
         return report
     
     except Exception as e:
         raise CustomException(e, sys)
+    
+def load_object(file_path):
+    try:
+        with open(file_path,"rb") as file_obj:
+            return dill.load(file_obj)
+            
+    except Exception as e:
+        raise CustomException(e,sys)
